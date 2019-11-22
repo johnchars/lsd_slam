@@ -73,7 +73,6 @@ set(lsd_SOURCE_FILES
   ${PROJECT_SOURCE_DIR}/src/Tracking/Sim3Tracker.cpp
   ${PROJECT_SOURCE_DIR}/src/Tracking/Relocalizer.cpp
   ${PROJECT_SOURCE_DIR}/src/Tracking/SE3Tracker.cpp
-  ${PROJECT_SOURCE_DIR}/src/Tracking/least_squares.cpp
   ${PROJECT_SOURCE_DIR}/src/Tracking/TrackingReference.cpp
   ${PROJECT_SOURCE_DIR}/src/IOWrapper/Timestamp.cpp
   ${PROJECT_SOURCE_DIR}/src/GlobalMapping/FabMap.cpp
@@ -100,9 +99,15 @@ include_directories(
 
 
 # build shared library.
+#<<<<<<< HEAD
 add_library(lsdslam SHARED ${SOURCE_FILES})
 target_link_libraries(lsdslam ${FABMAP_LIB} ${G2O_LIBRARIES} ${catkin_LIBRARIES} csparse cxsparse X11 ${OpenCV_LIBS}) #X11 cwj
 #rosbuild_link_boost(lsdslam thread)
+#=======
+#rosbuild_add_library(lsdslam SHARED ${SOURCE_FILES})
+#target_link_libraries(lsdslam ${FABMAP_LIB} g2o_core g2o_stuff csparse cxsparse g2o_solver_csparse g2o_csparse_extension g2o_types_sim3 g2o_types_sba X11)
+#rosbuild_link_boost(lsdslam thread)
+#>>>>>>> 861c267dc45e8537b96682f80828ba61eae32439
 
 
 # build live ros node
@@ -111,9 +116,14 @@ target_link_libraries(live_slam lsdslam ${catkin_LIBRARIES} ${G2O_LIBRARIES} X11
 
 
 # build image node
+#<<<<<<< HEAD
 add_executable(dataset src/main_on_images.cpp)
 target_link_libraries(dataset lsdslam ${catkin_LIBRARIES} ${G2O_LIBRARIES} X11 ) # X11 cwj
 
 # TODO add INSTALL
 
+#=======
+#rosbuild_add_executable(dataset_slam src/main_on_images.cpp)
+#target_link_libraries(dataset_slam lsdslam)
+#>>>>>>> 861c267dc45e8537b96682f80828ba61eae32439
 
