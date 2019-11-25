@@ -50,3 +50,9 @@ adding include_directories(${catkin_INCLUDE_DIRS}) in lsd_slam_core/CMakeLists.t
 > compilation completed 
 
 #### E8
+QObject::startTimer: Timers cannot be started from another thread
+#### A8
+https://github.com/tum-vision/lsd_slam/issues/224
+bool displayDepthMap = false;
+
+However, the depthMap disappeared.
